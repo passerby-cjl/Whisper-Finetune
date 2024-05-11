@@ -31,7 +31,7 @@ def create_annotation_text(data_dir, annotation_path):
         logger = get_logger(log_level=logging.CRITICAL)
         logger.setLevel(logging.CRITICAL)
         inference_pipline = pipeline(task=Tasks.punctuation,
-                                     model='damo/punc_ct-transformer_zh-cn-common-vocab272727-pytorch',
+                                     model='iic/punc_ct-transformer_cn-en-common-vocab471067-large',
                                      model_revision="v1.0.0")
     if not os.path.exists(annotation_path):
         os.makedirs(annotation_path)
