@@ -79,6 +79,7 @@ if ddp:
 # 获取模型
 model = WhisperForConditionalGeneration.from_pretrained(args.base_model,
                                                         load_in_8bit=args.use_8bit,
+                                                        attn_implementation="eager",
                                                         device_map=device_map,
                                                         local_files_only=args.local_files_only)
 model.config.forced_decoder_ids = None
