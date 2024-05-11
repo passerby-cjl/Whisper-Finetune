@@ -48,6 +48,7 @@ print_arguments(args)
 processor = WhisperProcessor.from_pretrained(args.base_model,
                                              language=args.language,
                                              task=args.task,
+                                             attn_implementation="eager",
                                              no_timestamps=not args.timestamps,
                                              local_files_only=args.local_files_only)
 
