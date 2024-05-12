@@ -5,6 +5,7 @@ import functools
 
 import soundfile
 from tqdm import tqdm_notebook as tqdm
+import capturer
 
 from utils.utils import download, unpack
 from utils.utils import add_arguments, print_arguments
@@ -42,14 +43,15 @@ def create_annotation_text(data_dir, annotation_path):
     with open(transcript_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
     for line in tqdm(lines, desc="Script:", leave=False):
-        line = line.strip()
-        if line == '': continue
-        audio_id, text = line.split(' ', 1)
-        # remove space
-        text = ''.join(text.split())
-        if args.add_pun:
-            text = inference_pipeline(input=text)[0]
-        transcript_dict[audio_id] = text
+        with capturer.CaptureOutput() as captured:
+            line = line.strip()
+            if line == '': continue
+            audio_id, text = line.split(' ', 1)
+            # remove space
+            text = ''.join(text.split())
+            if args.add_pun:
+                text = inference_pipeline(input=text)[0]
+            transcript_dict[audio_id] = text
     # 训练集
     data_types = ['train', 'dev']
     lines = []
