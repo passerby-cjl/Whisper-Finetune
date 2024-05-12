@@ -48,7 +48,9 @@ def create_annotation_text(data_dir, annotation_path):
         # remove space
         text = ''.join(text.split())
         if args.add_pun:
-            text = inference_pipeline(input=text)['text']
+            text = inference_pipeline(input=text)
+            print("result len", len(text))
+            text = text[0]
         transcript_dict[audio_id] = text
     # 训练集
     data_types = ['train', 'dev']
