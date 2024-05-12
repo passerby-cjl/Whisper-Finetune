@@ -30,7 +30,7 @@ def create_annotation_text(data_dir, annotation_path):
         from modelscope.utils.logger import get_logger
         logger = get_logger(log_level=logging.CRITICAL)
         logger.setLevel(logging.CRITICAL)
-        inference_pipline = pipeline(task=Tasks.punctuation,
+        inference_pipeline = pipeline(task=Tasks.punctuation,
                                      model='iic/punc_ct-transformer_cn-en-common-vocab471067-large',
                                      model_revision="v2.0.4")
     if not os.path.exists(annotation_path):
@@ -48,7 +48,7 @@ def create_annotation_text(data_dir, annotation_path):
         # remove space
         text = ''.join(text.split())
         if args.add_pun:
-            text = inference_pipline(text_in=text)['text']
+            text = inference_pipeline(input=text)['text']
         transcript_dict[audio_id] = text
     # 训练集
     data_types = ['train', 'dev']
