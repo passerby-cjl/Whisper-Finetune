@@ -41,7 +41,7 @@ def create_annotation_text(data_dir, annotation_path):
     transcript_dict = {}
     with open(transcript_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
-    for line in tqdm(lines, desc="Script:"):
+    for line in tqdm(lines, desc="Script:", leave=False):
         line = line.strip()
         if line == '': continue
         audio_id, text = line.split(' ', 1)
@@ -67,7 +67,7 @@ def create_annotation_text(data_dir, annotation_path):
                 line = {"audio": {"path": audio_path}, "sentence": text}
                 lines.append(line)
     # 添加音频时长
-    for i in tqdm(range(len(lines)), desc="Duration:"):
+    for i in tqdm(range(len(lines)), desc="Duration:", leave=False):
         audio_path = lines[i]['audio']['path']
         sample, sr = soundfile.read(audio_path)
         duration = round(sample.shape[-1] / float(sr), 2)
@@ -89,7 +89,7 @@ def create_annotation_text(data_dir, annotation_path):
             line = {"audio": {"path": audio_path}, "sentence": text}
             lines.append(line)
     # 添加音频时长
-    for i in tqdm(range(len(lines)), desc="Duration:"):
+    for i in tqdm(range(len(lines)), desc="Duration:", leave=False):
         audio_path = lines[i]['audio']['path']
         sample, sr = soundfile.read(audio_path)
         duration = round(sample.shape[-1] / float(sr), 2)
