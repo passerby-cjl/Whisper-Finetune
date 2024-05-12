@@ -4,7 +4,7 @@ import os
 import functools
 
 import soundfile
-from tqdm import tqdm
+from tqdm import tqdm_notebook as tqdm
 
 from utils.utils import download, unpack
 from utils.utils import add_arguments, print_arguments
