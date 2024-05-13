@@ -4,7 +4,7 @@ import os
 import functools
 
 import soundfile
-from tqdm.notebook import tqdm
+from tqdm import tqdm
 
 from utils.utils import download, unpack
 from utils.utils import add_arguments, print_arguments
@@ -48,7 +48,7 @@ def create_annotation_text(data_dir, annotation_path):
         # remove space
         text = ''.join(text.split())
         if args.add_pun:
-            text = inference_pipeline(input=text)[0]
+            text = inference_pipeline(input=text)[0]['text']
         transcript_dict[audio_id] = text
     # 训练集
     data_types = ['train', 'dev']
@@ -66,7 +66,7 @@ def create_annotation_text(data_dir, annotation_path):
                 line = {"audio": {"path": audio_path}, "sentence": text}
                 lines.append(line)
     # 添加音频时长
-    for i in tqdm(range(len(lines)), desc="Duration:", leave=False):
+    for i in tqdm(range(len(lines)), desc="Duration:"):
         audio_path = lines[i]['audio']['path']
         sample, sr = soundfile.read(audio_path)
         duration = round(sample.shape[-1] / float(sr), 2)
@@ -88,7 +88,7 @@ def create_annotation_text(data_dir, annotation_path):
             line = {"audio": {"path": audio_path}, "sentence": text}
             lines.append(line)
     # 添加音频时长
-    for i in tqdm(range(len(lines)), desc="Duration:", leave=False):
+    for i in tqdm(range(len(lines)), desc="Duration:"):
         audio_path = lines[i]['audio']['path']
         sample, sr = soundfile.read(audio_path)
         duration = round(sample.shape[-1] / float(sr), 2)
