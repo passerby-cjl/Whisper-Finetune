@@ -126,6 +126,7 @@ training_args = \
                              fp16=args.fp16,  # 是否使用半精度训练
                              report_to=["tensorboard"],  # 指定使用tensorboard保存log
                              save_steps=args.save_steps,  # 指定保存检查点的步数
+                             save_safetensors=False,  #设置不保存safetensors
                              eval_steps=args.eval_steps,  # 指定评估模型的步数
                              save_total_limit=5,  # 只保存最新检查点的数量
                              optim='adamw_torch',  # 指定优化方法
