@@ -20,9 +20,9 @@ class SavePeftModelCallback(TrainerCallback):
             kwargs["model"].save_pretrained(peft_model_dir)
             peft_config_path = os.path.join(checkpoint_folder, "adapter_model/adapter_config.json")
             peft_model_path = os.path.join(checkpoint_folder, "adapter_model/adapter_model.bin")
-            if not os.path.exists(peft_config_path):
+            if os.path.exists(peft_config_path):
                 os.remove(peft_config_path)
-            if not os.path.exists(peft_model_path):
+            if os.path.exists(peft_model_path):
                 os.remove(peft_model_path)
             if os.path.exists(peft_model_dir):
                 shutil.rmtree(peft_model_dir)
