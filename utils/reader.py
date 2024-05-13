@@ -77,8 +77,10 @@ class CustomDataset(Dataset):
             self.data_list = self.dataset_reader.get_keys()
         else:
             # 获取数据列表
+            print("读取数据列表：", self.data_list_path)
             with open(self.data_list_path, 'r', encoding='utf-8') as f:
                 lines = f.readlines()
+            print("列表长度：", len(lines))
             self.data_list = []
             for line in tqdm(lines, desc='读取数据列表'):
                 if isinstance(line, str):
