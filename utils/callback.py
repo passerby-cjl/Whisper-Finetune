@@ -20,12 +20,12 @@ class SavePeftModelCallback(TrainerCallback):
             kwargs["model"].save_pretrained(peft_model_dir)
             peft_config_path = os.path.join(checkpoint_folder, "adapter_model/adapter_config.json")
             peft_model_path = os.path.join(checkpoint_folder, "adapter_model/adapter_model.bin")
-            if os.path.exists(peft_config_path):
-                os.remove(peft_config_path)
-            if os.path.exists(peft_model_path):
-                os.remove(peft_model_path)
-            if os.path.exists(peft_model_dir):
-                shutil.rmtree(peft_model_dir)
+            # if os.path.exists(peft_config_path):
+            #     os.remove(peft_config_path)
+            # if os.path.exists(peft_model_path):
+            #     os.remove(peft_model_path)
+            # if os.path.exists(peft_model_dir):
+            #     shutil.rmtree(peft_model_dir)
             # 保存效果最好的模型
             best_checkpoint_folder = os.path.join(args.output_dir, f"{PREFIX_CHECKPOINT_DIR}-best")
             # 因为只保存最新5个检查点，所以要确保不是之前的检查点
