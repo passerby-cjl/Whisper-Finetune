@@ -16,7 +16,7 @@ class SavePeftModelCallback(TrainerCallback):
         if args.local_rank == 0 or args.local_rank == -1:
             # 复制Lora模型，主要是兼容旧版本的peft
             checkpoint_folder = os.path.join(args.output_dir, f"{PREFIX_CHECKPOINT_DIR}-{state.global_step}")
-            peft_model_dir = os.path.join(checkpoint_folder, "adapter_model")
+            peft_model_dir = checkpoint_folder
             kwargs["model"].save_pretrained(peft_model_dir)
             peft_config_path = os.path.join(checkpoint_folder, "adapter_model/adapter_config.json")
             peft_model_path = os.path.join(checkpoint_folder, "adapter_model/adapter_model.bin")
