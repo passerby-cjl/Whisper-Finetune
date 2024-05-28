@@ -87,10 +87,11 @@ class CustomDataset(Dataset):
                     line = json.loads(line)
                 if not isinstance(line, dict): continue
                 # 跳过超出长度限制的音频
-                if line["duration"] < self.min_duration:
-                    continue
-                if self.max_duration != -1 and line["duration"] > self.max_duration:
-                    continue
+                if 'duration' in line.keys():
+                    if line["duration"] < self.min_duration:
+                        continue
+                    if self.max_duration != -1 and line["duration"] > self.max_duration:
+                        continue
                 self.data_list.append(dict(line))
 
     # 从数据列表里面获取音频数据、采样率和文本
