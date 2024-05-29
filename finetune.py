@@ -21,6 +21,7 @@ add_arg("train_data",    type=str, default="dataset/train.json",       help="训
 add_arg("test_data",     type=str, default="dataset/test.json",        help="测试数据集的路径")
 add_arg("base_model",    type=str, default="openai/whisper-tiny",      help="Whisper的基础模型")
 add_arg("output_dir",    type=str, default="output/",                  help="训练保存模型的路径")
+add_arg("logging_dir",    type=str, default="logs/",                  help="训练保存日志的路径")
 add_arg("warmup_steps",  type=int, default=50,      help="训练预热步数")
 add_arg("logging_steps", type=int, default=100,     help="打印日志步数")
 add_arg("eval_steps",    type=int, default=1000,    help="多少步数评估一次")
@@ -133,6 +134,7 @@ training_args = \
                              ddp_find_unused_parameters=False if ddp else None,  # 分布式训练设置
                              dataloader_num_workers=args.num_workers,  # 设置读取数据的线程数量
                              logging_steps=args.logging_steps,  # 指定打印log的步数
+                             logging_dir=args.logging_dir,  #指定保存log的位置
                              remove_unused_columns=False,  # 删除模型不需要的数据列
                              label_names=["labels"])  # 与标签对应的输入字典中的键列表
 
