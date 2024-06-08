@@ -97,7 +97,7 @@ print('加载LoRA模块...')
 if args.resume_from_checkpoint:
     # 恢复训练时加载Lora参数
     print("Loading adapters from checkpoint.")
-    model = PeftModel.from_pretrained(model, os.path.join(args.resume_from_checkpoint, "adapter_model"), is_trainable=True)
+    model = PeftModel.from_pretrained(model, args.resume_from_checkpoint, is_trainable=True)
 else:
     print(f'adding LoRA modules...')
     target_modules = ["k_proj", "q_proj", "v_proj", "out_proj", "fc1", "fc2"]
